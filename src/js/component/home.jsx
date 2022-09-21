@@ -1,26 +1,43 @@
-import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState } from "react";
+import { Task } from "./Task.jsx";
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const [tasks, setTasks] = useState([
+    "Make the bed",
+    "Wash my hands",
+    "Eat",
+    "Walk the dog",
+  ]);
+  const [taskName, setTaskName] = useState("");
+
+  return (
+    <React.Fragment>
+      <h1>todos</h1>
+      <div className="tareas">
+        <input
+          type="text"
+          placeholder="What needs to be done?"
+          value={taskName}
+          onChange={(event) => {
+            setTaskName(event.target.value);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+			  if(taskName.trim() === "") return 
+              setTasks([...tasks, taskName]);
+              setTaskName("");
+            }
+          }}
+        />
+
+        {tasks.map((task, index) => {
+          return <Task key={index} task={task} tasks={tasks} setTasks={setTasks} id={index}/>;
+        })}
+        <span className="item-left">{tasks.length > 0 ? tasks.length+" item left" : "No tasks, add a task"}</span>
+      </div>
+    </React.Fragment>
+  );
 };
 
 export default Home;
