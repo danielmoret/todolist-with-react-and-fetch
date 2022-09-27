@@ -15,6 +15,11 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+#app{
+    display: flex;
+    flex-direction: column;
+}
+
 h1{
     font-size: 100px;
     text-align: center;
@@ -66,5 +71,11 @@ span{
     padding: 10px;
     font-size: 15px;
     color: rgb(137, 146, 155);
+}
+
+.btn-clear{
+    border: none;
+    background-color: gray;
+    color: white;
 }
 

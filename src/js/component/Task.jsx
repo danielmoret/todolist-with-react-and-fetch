@@ -14,14 +14,18 @@ export function Task(props){
                     setActiveButton(false)
                 }}
                 >
-              <span>{props.task}</span>
+              <span>{props.task.label}</span>
               <span 
               className={activeButton ? "red" : "disabled"}
               onClick={(event) => 
                 {
-            
-                props.setTasks(props.tasks.filter((task, index) => index !== props.id)
-              )}}>X</span>
+                  let array = props.tasks.filter((task, index) => index !== props.id)
+                  if(array.length === 0){
+                    props.deleteTodo()
+                  }else{
+                    props.updateTodo(array)
+                  }
+              }}>X</span>
             </div>
         )
 }
